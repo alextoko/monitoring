@@ -153,15 +153,16 @@ window.setAlarm = function(){
 };
 
 /* ===== HISTORY + CHART ===== */
-const API_URL = "https://script.google.com/macros/s/AKfycbw-hhAb1u1OwDLpZIhAyokB4TnUZzHEZuhlzA6R0LBmD8z3MuqAw0YmDeC4yh5Ny8qW/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbyKDS0BekAfWxVQu3oqjV-Ec2vhq7WRKT5Zv8Iw7j3rqxIMEh-39xRg9BeiVlgPlEWU6w/exec";
 
 async function loadHistory(){
   try{
     const res = await fetch(API_URL);
     const data = await res.json();
 
+    console.log(data); // DEBUG
+
     renderLog(data.log);
-    renderChart(data.chart);
 
   }catch(e){
     console.log("Error load history", e);
@@ -173,19 +174,41 @@ function renderLog(log){
   const el = document.getElementById("logTable");
   if(!el) return;
 
+  if(!log || log.length === 0){
+    el.innerHTML = "Belum ada data";
+    return;
+  }
+
   let html = `
-    <table style="width:100%;text-align:center">
-      <tr><th>Time</th><th>Temp</th></tr>
+    <table style="
+      width:100%;
+      border-collapse:collapse;
+      text-align:center;
+      font-size:14px;
+    ">
+      <thead>
+        <tr style="background:#f2f2f2;">
+          <th style="border:1px solid #999;padding:5px;">Time</th>
+          <th style="border:1px solid #999;padding:5px;">Temp</th>
+        </tr>
+      </thead>
+      <tbody>
   `;
 
-  log.forEach(r=>{
-    html += `<tr>
-      <td>${r.time}</td>
-      <td>${r.temp}°C</td>
-    </tr>`;
+  log.forEach((r,i)=>{
+    html += `
+      <tr style="background:${i%2===0?'#ffffff':'#f9f9f9'}">
+        <td style="border:1px solid #999;padding:5px;">${r.time}</td>
+        <td style="border:1px solid #999;padding:5px;">${r.temp}°C</td>
+      </tr>
+    `;
   });
 
-  html += "</table>";
+  html += `
+      </tbody>
+    </table>
+  `;
+
   el.innerHTML = html;
 }
 
