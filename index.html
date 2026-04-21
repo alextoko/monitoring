@@ -4,61 +4,68 @@
 <meta charset="UTF-8">
 <title>Monitoring Turbin</title>
 
-<style>
-body{font-family:Segoe UI;background:#d9d9d9;margin:0}
-.header{background:#00a8e8;padding:15px;text-align:center;font-weight:bold}
-.container{display:flex;gap:10px;padding:10px}
-.panel{background:#cfcfcf;border-radius:10px;padding:10px;flex:1}
-.title{background:#ff9800;padding:10px;text-align:center;border-radius:8px;margin-bottom:10px}
-.temp{font-size:90px;text-align:center;background:#eee;border-radius:10px;padding:20px}
-.row{display:flex;gap:10px;margin-top:10px}
-.box{flex:1;background:white;padding:10px;border-radius:8px;text-align:center;font-weight:bold}
-.green{background:#4CAF50;color:white}
-.red{background:#e74c3c;color:white}
-.yellow{background:#f1c40f}
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="header">MONITORING TURBIN</div>
 
-<div class="container">
+<div class="wrapper">
 
-<div class="panel">
-<div class="title">TEMPERATURE</div>
+  <!-- ATAS -->
+  <div class="section top">
 
-<div class="temp" id="temp">0.0°C</div>
+    <div class="panel">
+      <div class="title">TEMPERATURE</div>
 
-<div class="row">
-<div class="box yellow" id="clock">00:00</div>
-<div class="box">SET</div>
-<div class="box" id="set">0</div>
+      <div class="temp" id="temp">0.0°C</div>
+
+      <div class="row">
+        <div class="box yellow" id="clock">00:00:00</div>
+        <div class="box">ALM ON</div>
+        <div class="box" id="setDisplay">0.0°C</div>
+        <div class="box yellow" onclick="setAlarm()">SET</div>
+      </div>
+
+      <div class="row">
+        <div class="box green">PWM</div>
+        <div class="box" id="pwm">0</div>
+        <div class="box green">DUTY</div>
+        <div class="box" id="duty">0%</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="title">STATUS</div>
+
+      <div class="row"><div class="box">MAX</div><div class="box" id="max">0</div></div>
+      <div class="row"><div class="box">MIN</div><div class="box" id="min">0</div></div>
+      <div class="row"><div class="box">AVG</div><div class="box" id="avg">0</div></div>
+      <div class="row"><div class="box">ALARM</div><div class="box" id="alarm">OFF</div></div>
+      <div class="row"><div class="box">IP</div><div class="box" id="ip">0.0.0.0</div></div>
+    </div>
+
+  </div>
+
+  <!-- BAWAH -->
+  <div class="section bottom">
+
+    <div class="panel">
+      <div class="title">LOG DATA SUHU</div>
+      <div id="logTable"></div>
+    </div>
+
+    <div class="panel">
+      <div class="title">GRAFIK 24 JAM</div>
+      <canvas id="chart"></canvas>
+    </div>
+
+  </div>
+
 </div>
 
-<div class="row">
-<div class="box green">PWM</div>
-<div class="box" id="pwm">0</div>
-<div class="box green">DUTY</div>
-<div class="box" id="duty">0%</div>
-</div>
-
-</div>
-
-<div class="panel">
-<div class="title">STATUS</div>
-
-<div class="row"><div class="box">MAX</div><div class="box" id="max">0</div></div>
-<div class="row"><div class="box">MIN</div><div class="box" id="min">0</div></div>
-<div class="row"><div class="box">AVG</div><div class="box" id="avg">0</div></div>
-
-<div class="row"><div class="box">ALARM</div><div class="box" id="alarm">OFF</div></div>
-<div class="row"><div class="box">IP</div><div class="box" id="ip">0.0.0.0</div></div>
-
-</div>
-
-</div>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module" src="app.js"></script>
+
 </body>
 </html>

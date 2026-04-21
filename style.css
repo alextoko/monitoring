@@ -1,0 +1,124 @@
+body{
+  font-family:Segoe UI;
+  background:#d9d9d9;
+  margin:0;
+  height:100vh;
+}
+
+/* HEADER */
+.header{
+  background:#00a8e8;
+  padding:12px;
+  text-align:center;
+  font-weight:bold;
+  font-size:20px;
+}
+
+/* WRAPPER */
+.wrapper{
+  height:calc(100vh - 50px);
+  display:flex;
+  flex-direction:column;
+}
+
+/* SECTION */
+.section{
+  display:flex;
+  gap:12px;        /* 🔥 jarak antar panel */
+  padding:10px;
+}
+
+/* ATAS */
+.section.top{
+  flex:0 0 auto;
+}
+
+/* BAWAH */
+.section.bottom{
+  flex:1;
+  display:flex;
+}
+
+/* PANEL */
+.panel{
+  background:#cfcfcf;
+  border-radius:10px;
+  padding:12px;
+
+  flex:1;
+  display:flex;
+  flex-direction:column;
+
+  gap:10px;        /* 🔥 kunci semua jarak rapi */
+}
+
+/* TITLE */
+.title{
+  background:#ff9800;
+  padding:8px;
+  text-align:center;
+  border-radius:8px;
+  font-weight:bold;
+
+  margin:0;        /* 🔥 hilangkan beda jarak */
+}
+
+/* TEMP */
+.temp{
+  flex:1;              /* 🔥 ini kunci utama */
+  font-size:58px;
+  font-weight:bold;
+  background:#eee;
+  border-radius:10px;
+
+  padding:14px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ROW */
+.row{
+  display:flex;
+  gap:10px;        /* 🔥 jarak antar box */
+}
+
+/* BOX */
+.box{
+  flex:1;
+  background:white;
+  padding:8px;
+  border-radius:8px;
+  text-align:center;
+  font-weight:bold;
+  font-size:14px;
+}
+
+.box.yellow{ cursor:pointer; }
+
+/* COLORS */
+.green{background:#4CAF50;color:white}
+.red{background:#e74c3c;color:white}
+.yellow{background:#f1c40f}
+
+/* TEMP COLOR */
+.temp.warning{ background:#f1c40f; }
+.temp.normal{ background:#eee; }
+
+/* LOG */
+#logTable{
+  flex:1;
+  overflow-y:auto;
+}
+
+/* CHART */
+#chart{
+  flex:1;
+}
+
+/* CANVAS FULL */
+canvas{
+  width:100% !important;
+  height:100% !important;
+}
