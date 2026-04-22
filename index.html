@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Monitoring Turbin</title>
+<title>Monitoring Suhu Oli</title>
 
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="header">MONITORING TURBIN</div>
+<div class="header">MONITORING SUHU OLI PELUMAS</div>
 
 <div class="wrapper">
 
@@ -16,13 +16,13 @@
   <div class="section top">
 
     <div class="panel">
-      <div class="title">TEMPERATURE</div>
+      <div class="title">SUHU</div>
 
       <div class="temp" id="temp">0.0°C</div>
 
       <div class="row">
         <div class="box yellow" id="clock">00:00:00</div>
-        <div class="box">ALM ON</div>
+        <div class="box">ALARM ON</div>
         <div class="box" id="setDisplay">0.0°C</div>
         <div class="box yellow" onclick="setAlarm()">SET</div>
       </div>
@@ -30,7 +30,7 @@
       <div class="row">
         <div class="box green">PWM</div>
         <div class="box" id="pwm">0</div>
-        <div class="box green">DUTY</div>
+        <div class="box green">DUTY CYCLE</div>
         <div class="box" id="duty">0%</div>
       </div>
     </div>
@@ -38,11 +38,11 @@
     <div class="panel">
       <div class="title">STATUS</div>
 
-      <div class="row"><div class="box">MAX</div><div class="box" id="max">0</div></div>
-      <div class="row"><div class="box">MIN</div><div class="box" id="min">0</div></div>
-      <div class="row"><div class="box">AVG</div><div class="box" id="avg">0</div></div>
-      <div class="row"><div class="box">ALARM</div><div class="box" id="alarm">OFF</div></div>
-      <div class="row"><div class="box">IP</div><div class="box" id="ip">0.0.0.0</div></div>
+      <div class="row"><div class="box">SUHU MAKSIMAL</div><div class="box" id="max">0</div></div>
+      <div class="row"><div class="box">SUHU MINIMAL</div><div class="box" id="min">0</div></div>
+      <div class="row"><div class="box">SUHU RATA-RATA</div><div class="box" id="avg">0</div></div>
+      <div class="row"><div class="box">STATUS ALARM</div><div class="box" id="alarm">OFF</div></div>
+      <div class="row"><div class="box">ALAMAT IP</div><div class="box" id="ip">0.0.0.0</div></div>
     </div>
 
   </div>
@@ -51,7 +51,7 @@
   <div class="section bottom">
 
     <div class="panel">
-      <div class="title">LOG DATA TEMPERATURE</div>
+      <div class="title">HISTORI DATA SUHU</div>
       <div id="logTable"></div>
     </div>
 

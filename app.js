@@ -187,8 +187,8 @@ function renderLog(log){
     ">
       <thead>
         <tr style="background:#f2f2f2;">
-          <th style="border:1px solid #999;padding:5px;">Time</th>
-          <th style="border:1px solid #999;padding:5px;">Temp</th>
+          <th style="border:1px solid #999;padding:5px;">Waktu</th>
+          <th style="border:1px solid #999;padding:5px;">Suhu</th>
         </tr>
       </thead>
       <tbody>
