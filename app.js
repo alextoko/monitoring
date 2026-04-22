@@ -153,16 +153,15 @@ window.setAlarm = function(){
 };
 
 /* ===== HISTORY + CHART ===== */
-const API_URL = "https://script.google.com/macros/s/AKfycbyKDS0BekAfWxVQu3oqjV-Ec2vhq7WRKT5Zv8Iw7j3rqxIMEh-39xRg9BeiVlgPlEWU6w/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwW4bE2Dcccirw4SClj80ExGDKodyt6AQobw99VVOhjZj8b5T8zDUZ_9Kd-ryS8WA6_kw/exec";
 
 async function loadHistory(){
   try{
     const res = await fetch(API_URL);
     const data = await res.json();
 
-    console.log(data); // DEBUG
-
     renderLog(data.log);
+    renderChart(data.chart); // ✅ pakai chart
 
   }catch(e){
     console.log("Error load history", e);
@@ -229,15 +228,27 @@ function renderChart(data){
     data:{
       labels: labels,
       datasets:[{
-        label:"Temperature",
+        label:"Rata-rata suhu per jam",
         data: values,
-        tension:0.3
+        tension:0.3,
+        spanGaps:true // biar null tidak putus garis
       }]
     },
     options:{
       responsive:true,
-      plugins:{
-        legend:{display:false}
+      scales:{
+        x:{
+          title:{
+            display:true,
+            text:"Jam"
+          }
+        },
+        y:{
+          title:{
+            display:true,
+            text:"Suhu (°C)"
+          }
+        }
       }
     }
   });
@@ -246,3 +257,8 @@ function renderChart(data){
 /* ===== AUTO REFRESH ===== */
 setInterval(loadHistory,5000);
 loadHistory();
+
+document.getElementById("chart").onclick = function(){
+  window.open("chart.html","_blank");
+};
+

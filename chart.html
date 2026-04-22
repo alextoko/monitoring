@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Detail Grafik Suhu</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+
+<div style="height:600px;">
+  <canvas id="detailChart"></canvas>
+</div>
+
+<style>
+body{
+  margin:0;
+  background:#111;
+  color:#fff;
+  font-family:Arial;
+  overflow:hidden;
+}
+
+#detailChart {
+  width: 100% !important;
+  height: 600px !important;
+}
+
+.container{
+  width:100vw;
+  height:100vh;
+  padding:10px;
+  box-sizing:border-box;
+}
+
+canvas{
+  width:100% !important;
+  height:100% !important;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <canvas id="detailChart"></canvas>
+</div>
+
+<script type="module" src="chart.js"></script>
+
+</body>
+</html>
