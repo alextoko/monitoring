@@ -1,3 +1,8 @@
+function logout(){
+  localStorage.removeItem("login");
+  window.location.href = "login.html";
+}
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, ref, onValue, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
@@ -12,6 +17,7 @@ const db = getDatabase(app);
 /* ===== GLOBAL VARIABLE (WAJIB) ===== */
 let currentTemp = null;
 let setPoint = null;
+let lastUpdate = 0;
 
 /* ===== HELPER ===== */
 function formatTemp(val){
@@ -48,10 +54,10 @@ onValue(ref(db,"Temperature/minimal"), s=>{
   }
 });
 
-onValue(ref(db,"Temperature/average"), s=>{
+onValue(ref(db,"Status/last_update"), s=>{
   const val = s.val();
-  if(val !== null){
-    document.getElementById("avg").innerHTML = formatTemp(val);
+  if(val){
+    lastUpdate = Number(val); // ✅ sekarang valid
   }
 });
 
@@ -115,10 +121,12 @@ function checkTemperature(){
 }
 
 /* ===== IP ===== */
+let deviceIP = "";
+
 onValue(ref(db,"Device/ip"), s=>{
   const val = s.val();
   if(val !== null){
-    document.getElementById("ip").innerHTML = val;
+    deviceIP = val; // simpan saja dulu
   }
 });
 
@@ -133,6 +141,12 @@ setInterval(()=>{
 
 /* ===== SET ALARM ===== */
 window.setAlarm = function(){
+
+  // 🔒 kalau belum login → arahkan ke login
+  if(localStorage.getItem("login") !== "true"){
+    window.location.href = "login.html";
+    return;
+  }
 
   let input = prompt("Masukkan suhu alarm (°C):");
   if(input === null) return;
@@ -150,6 +164,11 @@ window.setAlarm = function(){
   }
 
   set(ref(db,"Set/alarm_on"), value);
+
+  // 🔥 AUTO LOGOUT setelah update
+  localStorage.removeItem("login");
+
+  alert("Setpoint berhasil diubah! Silakan login lagi jika ingin ubah lagi.");
 };
 
 /* ===== HISTORY + CHART ===== */
@@ -254,6 +273,56 @@ function renderChart(data){
   });
 }
 
+let status = "UNKNOWN";
+let lastChange = 0; // waktu terakhir status berubah
+
+function checkESPStatus(){
+  const el = document.getElementById("avg");
+  const ipEl = document.getElementById("ip");
+
+  if(!el || !ipEl) return;
+
+  const now = Date.now();
+  const diff = now - lastUpdate;
+
+  const OFFLINE_LIMIT = 10000;
+  const HOLD_TIME = 5000;
+
+  // ===== OFFLINE =====
+  if(diff > OFFLINE_LIMIT){
+    if(status !== "OFFLINE" && (now - lastChange > HOLD_TIME)){
+
+      el.innerHTML = "OFFLINE";
+      el.className = "box red";
+
+      // 🔥 IP kosong + putih
+      ipEl.innerHTML = "-";
+      ipEl.className = "box"; 
+
+      status = "OFFLINE";
+      lastChange = now;
+    }
+  }
+
+  // ===== ONLINE =====
+  else {
+    if(status !== "ONLINE" && (now - lastChange > HOLD_TIME)){
+
+      el.innerHTML = "ONLINE";
+      el.className = "box green";
+
+      // 🔥 tampilkan IP + hijau
+      ipEl.innerHTML = deviceIP || "-";
+      ipEl.className = "box green";
+
+      status = "ONLINE";
+      lastChange = now;
+    }
+  }
+}
+
+setInterval(checkESPStatus, 1000);
+
 /* ===== AUTO REFRESH ===== */
 setInterval(loadHistory,5000);
 loadHistory();
@@ -261,4 +330,6 @@ loadHistory();
 document.getElementById("chart").onclick = function(){
   window.open("chart.html","_blank");
 };
+
+
 

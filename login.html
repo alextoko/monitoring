@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      font-family:sans-serif;
+      background:#f0f0f0;
+    }
+    .box{
+      background:white;
+      padding:20px;
+      border-radius:10px;
+      text-align:center;
+    }
+    input{
+      margin:5px;
+      padding:10px;
+      width:200px;
+    }
+    button{
+      padding:10px 20px;
+      background:green;
+      color:white;
+      border:none;
+      border-radius:5px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <h2>LOGIN</h2>
+  <input type="text" id="user" placeholder="Username"><br>
+  <input type="password" id="pass" placeholder="Password"><br>
+  <button onclick="login()">Login</button>
+</div>
+
+<script>
+function login(){
+  const u = document.getElementById("user").value;
+  const p = document.getElementById("pass").value;
+
+  // 🔥 USER & PASSWORD (ubah sesuai kamu)
+  if(u === "admin" && p === "kocak"){
+    localStorage.setItem("login", "true");
+    window.location.href = "index.html";
+  } else {
+    alert("Login gagal!");
+  }
+}
+</script>
+
+</body>
+</html>
