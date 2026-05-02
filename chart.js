@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbwW4bE2Dcccirw4SClj80ExGDKodyt6AQobw99VVOhjZj8b5T8zDUZ_9Kd-ryS8WA6_kw/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbz4entNHRnsf8rgvCbZUx00GVo2W-5X7HmNqUvF8AMXOmT1z25z1Omj_R9UMgmB2OO3vQ/exec";
 
 let chart;
 let lastMinute = null;
