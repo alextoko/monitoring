@@ -108,11 +108,18 @@ function checkTemperature(){
   const el = document.getElementById("temp");
   if(!el) return;
 
-  // pastikan dua-duanya sudah ada
   if(currentTemp === null || setPoint === null) return;
 
-  el.classList.remove("normal","warning");
+  // reset class
+  el.classList.remove("normal","warning","error");
 
+  // 🚨 kondisi suhu 0 (PRIORITAS PALING ATAS)
+  if(currentTemp === 0){
+    el.classList.add("error");
+    return;
+  }
+
+  // 🔥 kondisi warning
   if(currentTemp > setPoint){
     el.classList.add("warning");
   } else {
@@ -275,6 +282,7 @@ function renderChart(data){
 
 let status = "UNKNOWN";
 let lastChange = 0; // waktu terakhir status berubah
+let stableCounter = 0;
 
 function checkESPStatus(){
   const el = document.getElementById("avg");
@@ -285,19 +293,26 @@ function checkESPStatus(){
   const now = Date.now();
   const diff = now - lastUpdate;
 
-  const OFFLINE_LIMIT = 10000;
-  const HOLD_TIME = 5000;
+  const OFFLINE_LIMIT = 30000;
+  const HOLD_TIME = 10000;
+
+  // 🔥 STABILISASI
+  if(diff > OFFLINE_LIMIT){
+    stableCounter++;
+  } else {
+    stableCounter = 0;
+  }
 
   // ===== OFFLINE =====
-  if(diff > OFFLINE_LIMIT){
+  if(stableCounter >= 3){
+
     if(status !== "OFFLINE" && (now - lastChange > HOLD_TIME)){
 
       el.innerHTML = "OFFLINE";
       el.className = "box red";
 
-      // 🔥 IP kosong + putih
       ipEl.innerHTML = "-";
-      ipEl.className = "box"; 
+      ipEl.className = "box";
 
       status = "OFFLINE";
       lastChange = now;
@@ -306,13 +321,16 @@ function checkESPStatus(){
 
   // ===== ONLINE =====
   else {
+
     if(status !== "ONLINE" && (now - lastChange > HOLD_TIME)){
 
       el.innerHTML = "ONLINE";
       el.className = "box green";
 
-      // 🔥 tampilkan IP + hijau
-      ipEl.innerHTML = deviceIP || "-";
+      if(ipEl.innerHTML !== deviceIP){
+        ipEl.innerHTML = deviceIP || "-";
+      }
+
       ipEl.className = "box green";
 
       status = "ONLINE";
@@ -324,7 +342,7 @@ function checkESPStatus(){
 setInterval(checkESPStatus, 1000);
 
 /* ===== AUTO REFRESH ===== */
-setInterval(loadHistory,5000);
+setInterval(loadHistory,10000);
 loadHistory();
 
 document.getElementById("chart").onclick = function(){

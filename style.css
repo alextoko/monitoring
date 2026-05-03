@@ -28,6 +28,11 @@ body{
   padding:10px;
 }
 
+.temp.error{
+  background:#e74c3c;
+  color:white;
+}
+
 /* ATAS */
 .section.top{
   flex:0 0 auto;
