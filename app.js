@@ -62,7 +62,7 @@ onValue(ref(db,"Status/last_update"), s=>{
 });
 
 /* ===== PWM ===== */
-onValue(ref(db,"Status/pwm_motor"), s=>{
+onValue(ref(db,"Status/rpm_motor"), s=>{
   const val = s.val();
   if(val !== null){
     document.getElementById("pwm").innerHTML = val;
