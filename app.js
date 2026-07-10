@@ -217,8 +217,8 @@ function renderLog(log){
     ">
       <thead>
         <tr style="background:#f2f2f2;">
-          <th style="border:1px solid #999;padding:5px;">Waktu</th>
-          <th style="border:1px solid #999;padding:5px;">Suhu</th>
+          <th style="border:1px solid #999;padding:5px;">Time</th>
+          <th style="border:1px solid #999;padding:5px;">Temperature (°C)</th>
         </tr>
       </thead>
       <tbody>
@@ -258,7 +258,7 @@ function renderChart(data){
     data:{
       labels: labels,
       datasets:[{
-        label:"Rata-rata suhu per jam",
+        label:"Temperature Graph",
         data: values,
         tension:0.3,
         spanGaps:true // biar null tidak putus garis
@@ -270,13 +270,13 @@ function renderChart(data){
         x:{
           title:{
             display:true,
-            text:"Jam"
+            text:"Clock"
           }
         },
         y:{
           title:{
             display:true,
-            text:"Suhu (°C)"
+            text:"Temperature (°C)"
           }
         }
       }

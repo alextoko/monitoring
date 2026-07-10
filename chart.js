@@ -22,7 +22,7 @@ function initChart(){
   data:{
     labels: generate24Hours(),
     datasets:[{
-      label:"Detail Suhu",
+      label:"Temperature Detail",
       data: Array(24).fill(null),
 
       borderWidth:2,
@@ -32,11 +32,11 @@ function initChart(){
       pointRadius:3,
       pointHoverRadius:6,
 
-      borderColor:'#111',
-      backgroundColor:'#fff',
+      borderColor:'#4fc3f7',
+      backgroundColor:'rgba(79,195,247,0.1)',
       fill:true
     }]
-  }, 
+  },
   options:{
     responsive:true,
     maintainAspectRatio:false,
