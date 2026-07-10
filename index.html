@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class="header">MONITORING SUHU OLI PELUMAS</div>
+<div class="header">MONITORING LUBRICATING OIL TEMPERATURE</div>
 
 <div class="wrapper">
 
@@ -16,7 +16,7 @@
   <div class="section top">
 
     <div class="panel">
-      <div class="title">SUHU</div>
+      <div class="title">TEMPERATURE</div>
 
       <div class="temp" id="temp">0.0°C</div>
 
@@ -30,7 +30,7 @@
       <div class="row">
         <div class="box green">RPM</div>
         <div class="box" id="pwm">0</div>
-        <div class="box green">PERSENTASE</div>
+        <div class="box green">PERCENTAGE</div>
         <div class="box" id="duty">0%</div>
       </div>
     </div>
@@ -38,11 +38,11 @@
     <div class="panel">
       <div class="title">STATUS</div>
 
-      <div class="row"><div class="box">SUHU MAKSIMAL</div><div class="box" id="max">0°C</div></div>
-      <div class="row"><div class="box">SUHU MINIMAL</div><div class="box" id="min">0°C</div></div>
-      <div class="row"><div class="box">STATUS DEVICE</div><div class="box" id="avg">0</div></div>
-      <div class="row"><div class="box">STATUS ALARM</div><div class="box" id="alarm">OFF</div></div>
-      <div class="row"><div class="box">ALAMAT IP ESP</div><div class="box" id="ip">0.0.0.0</div></div>
+      <div class="row"><div class="box">MAXIMUM TEMPERATURE</div><div class="box" id="max">0°C</div></div>
+      <div class="row"><div class="box">MINIMUM TEMPERATURE</div><div class="box" id="min">0°C</div></div>
+      <div class="row"><div class="box">DEVICE STATUS</div><div class="box" id="avg">0</div></div>
+      <div class="row"><div class="box">ALARM STATUS</div><div class="box" id="alarm">OFF/ON</div></div>
+      <div class="row"><div class="box">ESP IP ADDRESS</div><div class="box" id="ip">0.0.0.0</div></div>
     </div>
 
   </div>
@@ -51,12 +51,12 @@
   <div class="section bottom">
 
     <div class="panel">
-      <div class="title">HISTORI DATA SUHU</div>
+      <div class="title">TEMPERATURE DATA HISTORY</div>
       <div id="logTable"></div>
     </div>
 
     <div class="panel">
-      <div class="title">GRAFIK 24 JAM</div>
+      <div class="title">24-HOUR CHART</div>
       <canvas id="chart"></canvas>
     </div>
 

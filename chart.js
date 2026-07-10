@@ -32,11 +32,11 @@ function initChart(){
       pointRadius:3,
       pointHoverRadius:6,
 
-      borderColor:'#4fc3f7',
-      backgroundColor:'rgba(79,195,247,0.1)',
+      borderColor:'#111',
+      backgroundColor:'#fff',
       fill:true
     }]
-  },
+  }, 
   options:{
     responsive:true,
     maintainAspectRatio:false,
@@ -49,7 +49,7 @@ function initChart(){
 
     plugins:{
       legend:{
-        labels:{color:'#fff'}
+        labels:{color:'#111'}
       },
 
       tooltip:{
@@ -98,7 +98,7 @@ function initChart(){
     scales:{
   x:{
     ticks:{
-      color:'#ccc',
+      color:'#111',
       autoSkip:false,
       maxRotation:0,
       minRotation:0,
@@ -124,7 +124,7 @@ function initChart(){
 
   y:{
     ticks:{ 
-      color:'#ccc',
+      color:'#111',
       stepSize:5,
       callback: v => {
       return Number.isInteger(v) 
