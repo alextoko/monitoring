@@ -33,7 +33,7 @@ function initChart(){
       pointHoverRadius:6,
 
       borderColor:'#4fc3f7',
-      backgroundColor:'rgba(79,195,247,0.1)',
+      backgroundColor:'rgba(79, 194, 247, 0.45)',
       fill:true
     }]
   },
@@ -391,6 +391,6 @@ function getRawData(log){
 // ===============================
 document.addEventListener("DOMContentLoaded", () => {
   initChart();
-  setInterval(loadDetail, 60000);
+  setInterval(loadDetail, 3000);
   loadDetail();
 });
